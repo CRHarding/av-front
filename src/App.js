@@ -9,7 +9,7 @@ class App extends Component {
     };
   }
   componentDidMount = () => {
-    this.getavmaints();
+    this.getAvmaints();
   };
   getavmaints = async () => {
     const response = await axios.get('http://localhost:3001/avmaint/all');
