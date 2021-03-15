@@ -12,21 +12,24 @@ class App extends Component {
     this.getAvmaints();
   };
   getAvmaints = async () => {
-    const response = await axios.get('http://localhost:3000/avmaint/all');
+    console.log('hello')
+    const response = await axios.get('http://localhost:3001/avmaint/all');
+    console.log(response)
     this.setState({
-      avmaints: response,
+      avmaints: response.data,
     });
   };
   
   render() {
-    const avmaints = this.state.avmaints.map((avmaint) => {
-      console.log(avmaint.acmodel)
-      return (
-        <div>
-          <h3>{avmaint.acmodel}</h3>
-        </div>
-      );
-    });
+    console.log(this.state.avmaints)
+    //  const avmaints = this.state.avmaints.map((avmaint) => {
+    //   console.log(avmaint.acmodel)
+    //   return (
+    //     <div>
+    //       <h3>{avmaint.acmodel}</h3>
+    //     </div>
+    //   );
+    // });
     
 
     return (
@@ -39,7 +42,12 @@ class App extends Component {
             value={this.state.acmodel}
           />
         </form>
-        {avmaints}
+        <div>
+        {this.state.avmaints.map((avmaint) => (               
+              <li> {avmaint.acmodel}</li>)
+          )}     
+        </div>
+        {/* {avmaints} */}
       </div>
     );
   }
