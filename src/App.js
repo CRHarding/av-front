@@ -12,24 +12,26 @@ class App extends Component {
     this.getAvmaints();
   };
   getAvmaints = async () => {
-    const response = await axios.get('http://localhost:3001/avmaint/all');
+    const response = await axios.get('http://localhost:3000/avmaint/all');
     this.setState({
-      avmaints: response.data,
+      avmaints: response,
     });
   };
   
   render() {
     const avmaints = this.state.avmaints.map((avmaint) => {
+      console.log(avmaint.acmodel)
       return (
         <div>
           <h3>{avmaint.acmodel}</h3>
         </div>
       );
     });
+    
 
     return (
       <div className='App'>
-        <form onSubmit={this.login}>
+        <form onSubmit={this.acmodel}>
           <input
             acmodel='model'
             type='text'
