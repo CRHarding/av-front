@@ -4,7 +4,8 @@ import './App.css';
 import { Route, Link } from 'react-router-dom';
 import Aircraft from './components/Aircraft';
 
-
+// import Profile from './components/Profile';
+// import FriendsPage from './components/FriendsPage';
 
 class App extends Component {
   constructor(props) {
