@@ -20,6 +20,29 @@ class App extends Component {
     });
   };
   
+  eventOnChange = (e) => {
+    e.preventDefault();
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  createACModel = async (e) => {
+    e.preventDefault();
+    //this.getTasks();
+    const data = {        
+        acmodel: this.state.acmodel,
+        engmodel: this.state.engmodel,
+        ttaf: this.state.ttaf,
+        ttsn: this.state.ttsn,
+                
+      };
+    console.log("before api event post" + data);
+    const response = await axios.post('http://localhost:3001/event/createACModel', data);
+    console.log("after api event response" + response);
+    this.getEvents();
+  };
+
   render() {
     console.log(this.state.avmaints)
     //  const avmaints = this.state.avmaints.map((avmaint) => {
@@ -44,12 +67,29 @@ class App extends Component {
         </form>
         <div>
         {this.state.avmaints.map((avmaint) => (               
-              <li> {avmaint.acmodel}</li>)
+              // <li> {avmaint.acmodel}</li>
+          <div>
+            <h3 className="showText"> Model: {avmaint.acmodel} engmodel{avmaint.engmodel} ttaf{avmaint.ttaf} ttsn{avmaint.ttsn}</h3>
+           </div>)
           )}     
         </div>
         {/* {avmaints} */}
       </div>
     );
+    <form className="taskInput" onSubmit={this.createEvent}>
+            <h3>Add Aircraft Model</h3>
+          <div className="input-wrapper">
+                <p className="input-name"> Aircraft Model </p>          
+                  <input
+                    name='name'
+                    className="taskInputCell"
+                    type='text'
+                    placeholder='enter aircraft model here'
+                    value={this.state.name}
+                    onChange={this.eventOnChange}
+                  />
+          </div>
+      </form>
   }
 }
 export default App;
