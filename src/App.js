@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import { Route, Link } from 'react-router-dom';
+import Aircraft from './components/Aircraft';
+
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -62,7 +67,14 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <form onSubmit={this.acmodel}>
+        <nav>
+          <Link to="/aircraft"> aircraft</Link>
+        </nav>
+        <h1>my aircraft</h1>
+        <Route path="/aircraft" render={() => (
+          <Aircraft acmodel={this.state.acmodel} />
+        )} />
+        {/* <form onSubmit={this.acmodel}>
           <input
             acmodel='model'
             type='text'
@@ -75,10 +87,10 @@ class App extends Component {
               // <li> {avmaint.acmodel}</li>
           <div>
             <h3 className="showText"> Model: {avmaint.acmodel} engmodel{avmaint.engmodel} ttaf{avmaint.ttaf} ttsn{avmaint.ttsn}</h3>
-           </div>)
+          </div>)
           )}     
         </div>
-        {/* {avmaints} */}
+        {avmaints} */}
       </div>
     );
     <form className="taskInput" onSubmit={this.createEvent}>

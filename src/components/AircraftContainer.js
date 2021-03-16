@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Route, withRouter, Link } from 'react-router-dom';
 
-import CreateAircraftForm from './CreateaircraftForm';
-import aircraftList from './aircraftList';
-import UpdateAircraftForm from './UpdateaircraftForm';
-// aircraft already populated with seeded datya
+import CreateAircraftForm from './CreateAircraftForm';
+import AircraftList from './AircraftList';
+import UpdateAircraftForm from './UpdateAircraftForm';
+
 class AircraftContainer extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            aircrafts: []
+            maintenance_dev: []
         }
     }
 
@@ -22,7 +22,7 @@ createAircraft = (e, aircraft) => {
     oldAircrafts.push(aircraft);
     
     this.setState({ aircrafts: oldAircrafts });
-    this.props.history.push('/profile/aircraft/list');
+    this.props.history.push('/aircraft/list');
 }
 
 updateAircraft = (e, aircraftId, revisedAircraft) => {
@@ -34,25 +34,25 @@ updateAircraft = (e, aircraftId, revisedAircraft) => {
     this.setState({
         aircrafts: updatedAircrafts
     })
-    this.props.history.push('/profile/aircraft/list');
+    this.props.history.push('/aircraft/list');
 }
 
 render() {
     //console.log(this.props);
     return (
         <div>
-            <Link to="/profile/aircraft/new">Add an Aircraft</Link>
-            <Link to="/profile/aircraft/list">All Aircraft</Link>
-            <Route path="/profile/aircraft/new" render={() => (
-                <CreateaircraftForm createaircraft={this.createaircraft} />
+            <Link to="/aircraft/new">Add an Aircraft</Link>
+            <Link to="/aircraft/list">All Aircraft</Link>
+            <Route path="/aircraft/new" render={() => (
+                <CreateAircraftForm createaircraft={this.createAircraft} />
         )} />
-        <Route path="/profile/aircraft/list" render={() => (
-            <aircraftList aircrafts={this.state.aircrafts} />
+        <Route path="/aircraft/list" render={() => (
+            <AircraftList aircrafts={this.state.aircrafts} />
         )} />
-        <Route path="/profile/aircraft/edit/:index" render={(routerProps) => (
-            <UpdateaircraftForm 
+        <Route path="/aircraft/edit/:index" render={(routerProps) => (
+            <UpdateAircraftForm 
                 aircrafts={this.state.aircrafts}
-                updateaircraft={this.updateAircraft}
+                updateAircraft={this.updateAircraft}
                 aircraftId={routerProps.match.params.index}
                 />
         )} />
