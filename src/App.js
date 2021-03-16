@@ -20,6 +20,11 @@ class App extends Component {
     });
   };
   
+// want to manipulate data that is already in the db
+// add maintenance. Display models update models.
+// look at the update post method
+// the update post form
+
   eventOnChange = (e) => {
     e.preventDefault();
     this.setState({
