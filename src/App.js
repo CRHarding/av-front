@@ -20,7 +20,7 @@ class App extends Component {
   };
   getAvmaints = async () => {
     console.log('hello')
-    const response = await axios.get('http://localhost:3001/avmaint/all');
+    const response = await axios.get('http://localhost:3001/avmaint/all' || 'https://aviation-maintenance.herokuapp.com/avmaint/all' );
     console.log(response)
     this.setState({
       avmaints: response.data,
