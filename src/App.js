@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.css';
 import { Route, Link } from 'react-router-dom';
 import Aircraft from './components/Aircraft';
+import AircraftList from './components/AircraftList';
 
 // import Profile from './components/Profile';
 // import FriendsPage from './components/FriendsPage';
@@ -71,9 +72,19 @@ class App extends Component {
         <nav>
           <Link to="/aircraft"> aircraft</Link>
         </nav>
-        <h1>my aircraft</h1>
-        <Route path="/aircraft" render={() => (
-          <Aircraft acmodel={this.state.acmodel} />
+        {/* <h1>my aircraft</h1> */}
+        <Route path="/aircraft" render={(routerProps) => (
+          <Aircraft 
+          avmaints={this.state.avmaints} 
+          {...routerProps}
+          />
+        )} />
+        <Route path="/aircraftPage/:id" render={(routerProps) => (
+          <AircraftList
+           avmaints={this.state.avmaints} 
+           acmodelId = {routerProps.match.params.id}
+           {...routerProps}
+           />
         )} />
         {/* <form onSubmit={this.acmodel}>
           <input

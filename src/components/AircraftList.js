@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom';
 const AircraftList = (props) => {
     return (
         <div>
-            {props.aircrafts.map((aircraft, index) => (
+            {props.aircraft.map((aircraft, index) => (
                 <div key={index}>
-                    <h4>{aircraft.title}</h4>
-                    <p>{aircraft.content}</p>
-                    <Link to={`/profile/aircraft/edit/${index}`}>EditAircraft</Link>
+                    <h4>{aircraft.acmodel}</h4>
+                    <p>{aircraft.engmodel}</p>
+                    <Link to={`/aircraft/edit/${index}`}>EditAircraft</Link>
                 </div>
-            ))}
+             ))}
         </div>
     )
 }
