@@ -20,14 +20,8 @@ const AircraftList = (props) => {
                     <p>total time airframe {foundAircraft.ttaf}</p>
                     <p>total time since new {foundAircraft.ttsn}</p>
                     <p>since major overhaul {foundAircraft.smoh}</p>
-                    {/* <Link to={`/aircraft/edit/${foundAircraft.id}`}>EditAircraft</Link> */}
-                    <Route path="/aircraft/edit/:index" render={(routerProps => (
-                        <UpdateAircraftForm
-                            avmaints={this.state.aircrafts}
-                            updateAircraft={this.updateAircraft}
-                            aircraftId={routerProps.match.params.index}
-                            />
-
+                    <Link to={`/aircraft/edit/${foundAircraft.id}`}>EditAircraft</Link>
+                    
                 {/* </div>
              ))} */}
         </div>

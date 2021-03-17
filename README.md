@@ -35,6 +35,12 @@ displays basic specifications and data associated with a model of aircraft
             damagehist: false
         }
 
+## Repository Links
+* https://github.com/tjgores/Aviation-Maintenance-backend
+* https://github.com/tjgores/Aviation-Maintenance-frontend
+* https://aviation-maintenance.herokuapp.com/avmaint/all
+* http://aviation-maint.surge.sh/
+
 ## User stories
 1. As a user I want to see aircraft models that are in the database
 
