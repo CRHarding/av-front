@@ -1,3 +1,40 @@
+# Project 4: Aviation Maintenance
+* Tom Gores
+
+## App idea
+
+displays basic specifications and data associated with a model of aircraft
+
+## Technologies employed
+
+* Node.js
+* Postgres
+* Express
+* EJS
+* Heroku
+* Surge
+
+## Planing and approach taken
+
+* Brainstorm for the app idea
+    + Aviation encyclopedia
+    + Current flight data
+    + Aircraft data and maintenance
+
+* Wireframe
+    + [Wireframe](./documentation/wireframe.png)
+        Database
+        Avmaint {
+            acmodel: "A35",
+            engmodel: "O-470"
+            ttaf: 2200
+            ttsn: 2200
+            smoh: 600
+            annualinsp: true
+            awdirectives: true
+            damagehist: false
+        }
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

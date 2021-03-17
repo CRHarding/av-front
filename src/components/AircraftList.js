@@ -15,8 +15,11 @@ const AircraftList = (props) => {
         <div>
             {/* {props.avmaints.find((avmaints, index) => (
                 <div key={index}> */}
-                    <h4>{foundAircraft.acmodel}</h4>
-                    <p>{foundAircraft.engmodel}</p>
+                    <h4>model {foundAircraft.acmodel}</h4>
+                    <p>engine {foundAircraft.engmodel}</p>
+                    <p>total time airframe {foundAircraft.ttaf}</p>
+                    <p>total time since new {foundAircraft.ttsn}</p>
+                    <p>since major overhaul {foundAircraft.smoh}</p>
                     <Link to={`/aircraft/edit/${foundAircraft.id}`}>EditAircraft</Link>
                 {/* </div>
              ))} */}
