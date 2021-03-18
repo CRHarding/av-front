@@ -8,6 +8,8 @@ import AircraftList from './components/AircraftList';
 // import Profile from './components/Profile';
 // import FriendsPage from './components/FriendsPage';
 
+const url = 'http://localhost:3001' || 'https://aviation-maintenance.herokuapp.com'
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +22,7 @@ class App extends Component {
   };
   getAvmaints = async () => {
     console.log('hello')
-    const response = await axios.get('http://localhost:3001/avmaint/all' || 'https://aviation-maintenance.herokuapp.com/avmaint/all' );
+    const response = await axios.get(`${url}/avmaint/all`);
     console.log(response)
     this.setState({
       avmaints: response.data,
