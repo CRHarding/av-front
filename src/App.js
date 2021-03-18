@@ -8,7 +8,7 @@ import AircraftList from './components/AircraftList';
 // import Profile from './components/Profile';
 // import FriendsPage from './components/FriendsPage';
 
-const url = 'http://localhost:3001' || 'https://aviation-maintenance.herokuapp.com'
+const url = 'https://aviation-maintenance.herokuapp.com'
 
 class App extends Component {
   constructor(props) {
