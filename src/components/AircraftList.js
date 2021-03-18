@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Route, withRouter, Link } from 'react-router-dom';
+import UpdateAircraftForm from './UpdateAircraftForm';
 // looks at the list populate the a/c model
 // if click on one then update aircraft
 // update would be the edit
@@ -21,7 +22,13 @@ const AircraftList = (props) => {
                     <p>total time since new {foundAircraft.ttsn}</p>
                     <p>since major overhaul {foundAircraft.smoh}</p>
                     <Link to={`/aircraft/edit/${foundAircraft.id}`}>EditAircraft</Link>
-                    
+                    <Route path={`/aircraft/edit/${foundAircraft.id}`} render={(routerProps) => (
+                        <UpdateAircraftForm 
+                            aircrafts={this.state.aircrafts}
+                            updateAircraft={this.updateAircraft}
+                            aircraftId={routerProps.match.params.index}
+                            />
+                    )} />
                 {/* </div>
              ))} */}
         </div>
