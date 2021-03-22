@@ -11,14 +11,13 @@ class CreateAircraftForm extends Component {
 }
 
 handleChange = (e) => {
-    console.log(e.target);
-    const { acmodel, value } = e.target;
+    const { name, value } = e.target;
     //            ^------ this is the same as...
     //const name = e.target.name;
     //const value = e.target.value;
 
     this.setState({
-        [acmodel]: value
+        [name]: value
     })
 }
 
@@ -29,17 +28,11 @@ render() {
     // const content = this.state.content;
     return (
         <form onSubmit={(e) => this.props.createAircraft(e, this.state)}>
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title">Model</label>
             <input
-                type="text"
-                name="title"
-                value={this.state.title}
-                onChange={this.handleChange}
-            />
-            <label htmlFor="content">Post Text</label>
-            <textarea
-                name="content"
-                value={this.state.content}
+                type="acmodel"
+                name="acmodel"
+                value={acmodel}
                 onChange={this.handleChange}
             />
             <input type="submit" value="Add an aircraft" />

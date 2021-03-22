@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 import Aircraft from './components/Aircraft';
 import AircraftList from './components/AircraftList';
+import AircraftContainer from './components/AircraftContainer';
+import CreateAircraftForm from './components/CreateAircraftForm';
+import UpdateAircraftForm from './components/UpdateAircraftForm';
 
 // import Profile from './components/Profile';
 // import FriendsPage from './components/FriendsPage';
@@ -17,18 +20,19 @@ class App extends Component {
       avmaints: [],
     };
   }
+
   componentDidMount = () => {
     this.getAvmaints();
   };
+
   getAvmaints = async () => {
-    console.log('hello')
-    const response = await axios.get(`${url}/avmaint/all`);
-    console.log(response)
+    const response = await axios.get(`http://localhost:3001/avmaint/all`);
+
     this.setState({
       avmaints: response.data,
     });
   };
-  
+
 // want to manipulate data that is already in the db
 // add maintenance. Display models update models.
 // look at the update post method
@@ -41,86 +45,74 @@ class App extends Component {
     });
   };
 
-  createACModel = async (e) => {
+  createACModel = async (e, data) => {
     e.preventDefault();
-    //this.getTasks();
-    const data = {        
-        acmodel: this.state.acmodel,
-        engmodel: this.state.engmodel,
-        ttaf: this.state.ttaf,
-        ttsn: this.state.ttsn,
-                
-      };
-    console.log("before api event post" + data);
-    const response = await axios.post('http://localhost:3001/event/createACModel', data);
-    console.log("after api event response" + response);
-    this.getEvents();
+
+    console.log(data);
+    const response = await axios.post('http://localhost:3001/avmaint', data);
+    console.log(response);
+
+    const avmaints = this.state.avmaints;
+    avmaints.push(response);
+    this.setState({
+      avmaints
+    })
   };
 
-  render() {
-    console.log(this.state.avmaints)
-    //  const avmaints = this.state.avmaints.map((avmaint) => {
-    //   console.log(avmaint.acmodel)
-    //   return (
-    //     <div>
-    //       <h3>{avmaint.acmodel}</h3>
-    //     </div>
-    //   );
-    // });
-    
+  updateAircraft = async (e, id, newACModel) => {
+    e.preventDefault();
 
+    const response = await axios.put(`http://localhost:3001/avmaint/update/${id}`, newACModel);
+    console.log(response);
+
+    const updatedAircrafts = this.state.avmaints.map(aircraft => (
+        id === aircraft.id ? response.data : aircraft
+
+    ))
+    this.setState({
+        avmaints: updatedAircrafts
+    })
+
+    this.props.history.push('/aircraft');
+  }
+
+  render() {
     return (
       <div className='App'>
         <nav>
           <Link to="/aircraft"> aircraft</Link>
         </nav>
-        {/* <h1>my aircraft</h1> */}
-        <Route path="/aircraft" render={(routerProps) => (
-          <Aircraft 
-          avmaints={this.state.avmaints} 
-          {...routerProps}
+        <Route exact path="/" render={() => (
+          <AircraftContainer planes={this.state.avmaints}/>
+        )} />
+        <Route exact path="/aircraft" render={(routerProps) => (
+          <Aircraft
+            avmaints={this.state.avmaints}
+            {...routerProps}
           />
         )} />
+        <Route exact path="/aircraft/new" render={() => (
+          <CreateAircraftForm createAircraft={this.createACModel}/>
+        )} />
+        <Route exact path="/aircraft/list" render={() => (
+            <AircraftList aircrafts={this.state.aircrafts} />
+        )} />
+        <Route exact path="/aircraft/edit/:index" render={(routerProps) => (
+            <UpdateAircraftForm
+                aircrafts={this.state.avmaints}
+                updateAircraft={this.updateAircraft}
+                aircraftId={routerProps.match.params.index}
+            />
+        )}/>
         <Route path="/aircraftPage/:id" render={(routerProps) => (
           <AircraftList
-           avmaints={this.state.avmaints} 
-           acmodelId = {routerProps.match.params.id}
-           {...routerProps}
+             aircrafts={this.state.avmaints}
+             acmodelId = {routerProps.match.params.id}
+             {...routerProps}
            />
         )} />
-        {/* <form onSubmit={this.acmodel}>
-          <input
-            acmodel='model'
-            type='text'
-            placeholder='model'
-            value={this.state.acmodel}
-          />
-        </form>
-        <div>
-        {this.state.avmaints.map((avmaint) => (               
-              // <li> {avmaint.acmodel}</li>
-          <div>
-            <h3 className="showText"> Model: {avmaint.acmodel} engmodel{avmaint.engmodel} ttaf{avmaint.ttaf} ttsn{avmaint.ttsn}</h3>
-          </div>)
-          )}     
-        </div>
-        {avmaints} */}
       </div>
     );
-    <form className="taskInput" onSubmit={this.createEvent}>
-            <h3>Add Aircraft Model</h3>
-          <div className="input-wrapper">
-                <p className="input-name"> Aircraft Model </p>          
-                  <input
-                    name='name'
-                    className="taskInputCell"
-                    type='text'
-                    placeholder='enter aircraft model here'
-                    value={this.state.name}
-                    onChange={this.eventOnChange}
-                  />
-          </div>
-      </form>
   }
 }
-export default App;
+export default withRouter(App);

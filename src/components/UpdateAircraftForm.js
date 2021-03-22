@@ -6,8 +6,7 @@ class UpdateAircraftForm extends Component {
         super(props);
 
         this.state = {
-            title: '',
-            content: ''
+            acmodel: ''
         }
     }
 
@@ -20,27 +19,22 @@ class UpdateAircraftForm extends Component {
     }
 
     componentDidMount = () => {
-        console.log(this.props.aircrafts[this.props.aircraftId]);
-            this.setState({
-            title: this.props.aircrafts[this.props.aircraftId].title,
-            content: this.props.aircrafts[this.props.aircraftId].content
-        })
+      const foundAircraft = this.props.aircrafts.find(aircraft=> {
+          return aircraft.id === parseInt(this.props.aircraftId);
+      })
+        this.setState({
+          acmodel: foundAircraft.acmodel
+      })
     }
 
     render() {
         return (
-            <form onSubmit={(e) => 
+            <form onSubmit={(e) =>
                 this.props.updateAircraft(e, this.props.aircraftId, this.state)}>
                 <input
                 type="text"
-                name="title"
-                value={this.state.title}
-                onChange={this.onChange}
-            />
-            <label htmlFor="content">Content</label>
-                <textarea
-                name="content"
-                value={this.state.content}
+                name="acmodel"
+                value={this.state.acmodel}
                 onChange={this.handleChange}
             />
             <input type="submit" value="Update aircraft" />
